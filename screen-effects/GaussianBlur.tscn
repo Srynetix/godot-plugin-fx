@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/fx/screen-effects/GaussianBlur.cs" type="Script" id=1]
+[ext_resource path="res://addons/fx/screen-effects/GaussianBlur.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/strength = 0.0
+shader_param/samples = 11
+
+[node name="GaussianBlur" type="ColorRect"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Strength = 0.0

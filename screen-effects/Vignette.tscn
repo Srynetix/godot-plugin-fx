@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/fx/screen-effects/Vignette.cs" type="Script" id=1]
+[ext_resource path="res://addons/fx/screen-effects/Vignette.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/size = 5.0
+shader_param/ratio = 0.0
+
+[node name="Vignette" type="ColorRect"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
+script = ExtResource( 1 )
+Ratio = 0.0
