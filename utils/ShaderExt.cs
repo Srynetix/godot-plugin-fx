@@ -1,17 +1,25 @@
 using Godot;
 
-namespace FxPlugin
+namespace SxGD
 {
     public static class ShaderExt
     {
-        public static T GetShaderParam<T>(CanvasItem canvasItem, string name)
+        public static T GetShaderParam<T>(CanvasItem canvasItem, string name) where T : new()
         {
-            return (T)((ShaderMaterial)canvasItem.Material).GetShaderParam(name);
+            if (canvasItem != null && canvasItem.Material != null)
+            {
+                return (T)((ShaderMaterial)canvasItem.Material).GetShaderParam(name);
+            }
+
+            return new T();
         }
 
         public static void SetShaderParam(CanvasItem canvasItem, string name, object value)
         {
-            ((ShaderMaterial)canvasItem.Material).SetShaderParam(name, value);
+            if (canvasItem != null && canvasItem.Material != null)
+            {
+                ((ShaderMaterial)canvasItem.Material).SetShaderParam(name, value);
+            }
         }
     }
 }

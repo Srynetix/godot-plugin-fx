@@ -1,6 +1,6 @@
 using Godot;
 
-namespace FxPlugin
+namespace SxGD
 {
     [Tool]
     public class MotionBlur : ColorRect
