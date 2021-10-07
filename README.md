@@ -14,6 +14,8 @@ git submodule add https://github.com/Srynetix/godot-plugin-fx addons/fx
 
 Simply add effects in your scene and configure them using exposed properties.
 
+There is an included sample scene in `samples/Sample.tscn` to play with the available effects and its parameters in a real-time demo.
+
 ## Features
 
 ### Screen effects
@@ -23,6 +25,14 @@ Simply add effects in your scene and configure them using exposed properties.
 **How to use**: Only add in scene tree  
 **Parameters**:
 - `strength`: Blur strength
+
+#### Better blur (`BetterBlur`)
+
+**How to use**: Only add in scene tree  
+**Parameters**:
+- `strength`: Blur strength
+
+*Note*: This is the `GaussianBlur` effect, but Web compatible (GLES2).
 
 #### Motion blur (`MotionBlur`)
 

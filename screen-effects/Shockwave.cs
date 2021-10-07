@@ -6,6 +6,13 @@ namespace SxGD
     public class Shockwave : ColorRect
     {
         [Export]
+        public float Size
+        {
+            get => ShaderExt.GetShaderParam<float>(this, "size");
+            set => ShaderExt.SetShaderParam(this, "size", value);
+        }
+
+        [Export]
         public float Force
         {
             get => ShaderExt.GetShaderParam<float>(this, "force");

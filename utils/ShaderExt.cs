@@ -6,7 +6,7 @@ namespace SxGD
     {
         public static T GetShaderParam<T>(CanvasItem canvasItem, string name) where T : new()
         {
-            if (canvasItem != null && canvasItem.Material != null)
+            if (canvasItem.Material != null)
             {
                 return (T)((ShaderMaterial)canvasItem.Material).GetShaderParam(name);
             }
@@ -16,7 +16,7 @@ namespace SxGD
 
         public static void SetShaderParam(CanvasItem canvasItem, string name, object value)
         {
-            if (canvasItem != null && canvasItem.Material != null)
+            if (canvasItem.Material != null)
             {
                 ((ShaderMaterial)canvasItem.Material).SetShaderParam(name, value);
             }

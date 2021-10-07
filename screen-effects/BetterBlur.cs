@@ -18,12 +18,16 @@ namespace SxGD
 
         private ColorRect _Step1;
         private ColorRect _Step2;
+        private BackBufferCopy _Copy;
         private float _Strength;
 
         public override void _Ready()
         {
             _Step1 = GetNode<ColorRect>("Step1");
             _Step2 = GetNode<ColorRect>("BackBufferCopy/Step2");
+            _Copy = GetNode<BackBufferCopy>("BackBufferCopy");
+            _Copy.Rect = new Rect2(RectPosition, RectSize);
+
             SetStrength(_Strength);
         }
 

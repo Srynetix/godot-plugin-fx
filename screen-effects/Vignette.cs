@@ -12,6 +12,13 @@ namespace SxGD
             set => ShaderExt.SetShaderParam(this, "ratio", value);
         }
 
+        [Export]
+        public float Size
+        {
+            get => ShaderExt.GetShaderParam<float>(this, "size");
+            set => ShaderExt.SetShaderParam(this, "size", value);
+        }
+
         public async void Fade(float duration)
         {
             var tween = new Tween();

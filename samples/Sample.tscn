@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://addons/fx/samples/Sample.cs" type="Script" id=1]
+[ext_resource path="res://addons/fx/screen-effects/GaussianBlur.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/fx/screen-effects/Shockwave.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/fx/screen-effects/Vignette.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/fx/screen-effects/MotionBlur.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/fx/screen-effects/FXCamera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/fx/screen-effects/BetterBlur.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/fx/screen-effects/MotionBlur.gdshader" type="Shader" id=8]
+[ext_resource path="res://addons/fx/screen-effects/GaussianBlur.gdshader" type="Shader" id=9]
+
+[sub_resource type="Shader" id=1]
+code = "
+shader_type canvas_item;
+render_mode blend_mul;
+
+uniform float size = 5.0;
+uniform float ratio = 0.0;
+
+void fragment() {
+  vec2 uv = SCREEN_UV;
+  uv *= 1.0 - uv.yx;
+
+  float vig = uv.x * uv.y * size;
+  vig = pow(vig, ratio);
+  COLOR = vec4(vig);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/size = 5.0
+shader_param/ratio = 0.0
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 8 )
+shader_param/angle_degrees = 0.0
+shader_param/samples = 10
+shader_param/strength = 0.0
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = ExtResource( 9 )
+shader_param/strength = 0.0
+shader_param/samples = 11
+
+[node name="Sample" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Effects" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vignette" parent="Effects" instance=ExtResource( 4 )]
+visible = false
+material = SubResource( 2 )
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+Size = 5.0
+
+[node name="Shockwave" parent="Effects" instance=ExtResource( 3 )]
+visible = false
+
+[node name="MotionBlur" parent="Effects" instance=ExtResource( 5 )]
+visible = false
+material = SubResource( 3 )
+
+[node name="GaussianBlur" parent="Effects" instance=ExtResource( 2 )]
+visible = false
+material = SubResource( 4 )
+
+[node name="FXCamera" parent="Effects" instance=ExtResource( 6 )]
+visible = false
+
+[node name="BetterBlur" parent="Effects" instance=ExtResource( 7 )]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Margin" type="MarginContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="UI/Margin"]
+margin_left = 20.0
+margin_top = 728.0
+margin_right = 412.0
+margin_bottom = 748.0
+mouse_filter = 2
+size_flags_vertical = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="UI/Margin/Margin"]
+margin_right = 392.0
+margin_bottom = 20.0
+mouse_filter = 2
+custom_constants/separation = 20
+
+[node name="EffectType" type="HBoxContainer" parent="UI/Margin/Margin/HBox"]
+margin_right = 186.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="Name" type="Label" parent="UI/Margin/Margin/HBox/EffectType"]
+margin_top = 3.0
+margin_right = 15.0
+margin_bottom = 17.0
+text = "FX"
+
+[node name="Value" type="OptionButton" parent="UI/Margin/Margin/HBox/EffectType"]
+margin_left = 25.0
+margin_right = 186.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Params" type="VBoxContainer" parent="UI/Margin/Margin/HBox"]
+margin_left = 206.0
+margin_right = 392.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3

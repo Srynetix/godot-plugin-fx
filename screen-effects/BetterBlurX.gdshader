@@ -2,7 +2,6 @@ shader_type canvas_item;
 
 uniform float strength : hint_range(0, 1, 0.001) = 0;
 
-//Blurs the screen in the X-direction.
 void fragment() {
     vec3 col = texture(SCREEN_TEXTURE, SCREEN_UV).xyz * 0.16;
     col += texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE.x, 0.0)).xyz * 0.15;

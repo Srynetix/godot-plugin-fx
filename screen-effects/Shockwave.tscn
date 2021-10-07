@@ -6,9 +6,9 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/center = Vector2( 0.5, 0.5 )
-shader_param/force = 0.09
-shader_param/size = 1.0
-shader_param/thickness = 0.05
+shader_param/force = 0.15
+shader_param/size = 0.25
+shader_param/thickness = 0.3
 
 [node name="Shockwave" type="ColorRect"]
 material = SubResource( 1 )
@@ -19,8 +19,9 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-Force = 0.09
-Thickness = 0.05
+Force = 0.15
+Thickness = 0.3
 Center = Vector2( 0.5, 0.5 )
+Size = 0.25
 
 [node name="Tween" type="Tween" parent="."]
