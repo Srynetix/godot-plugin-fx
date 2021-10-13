@@ -95,6 +95,7 @@ material = SubResource( 4 )
 visible = false
 
 [node name="BetterBlur" parent="Effects" instance=ExtResource( 7 )]
+visible = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 

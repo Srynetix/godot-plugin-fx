@@ -33,8 +33,10 @@ public class Sample : Control
 
         // Spawn some sprites
         var spriteCount = 50;
-        for (int i = 0; i < spriteCount; ++i) {
-            var sprite = new Sprite() {
+        for (int i = 0; i < spriteCount; ++i)
+        {
+            var sprite = new Sprite()
+            {
                 Texture = texture,
                 Scale = new Vector2((float)GD.RandRange(0.5, 2), (float)GD.RandRange(0.5, 2)),
                 Position = new Vector2((float)GD.RandRange(0, vpSize.x), (float)GD.RandRange(0, vpSize.y)),
@@ -58,20 +60,25 @@ public class Sample : Control
         EffectSelected(0);
     }
 
-    private void EffectSelected(int index) {
+    private void EffectSelected(int index)
+    {
         var effect = _EffectSelection.GetItemText(index);
         BuildParams(effect);
     }
 
-    private void PRVisible(Control control) {
-        var visibleHbox = new HBoxContainer() {
+    private void PRVisible(Control control)
+    {
+        var visibleHbox = new HBoxContainer()
+        {
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
         };
-        var visibleLabel = new Label() {
+        var visibleLabel = new Label()
+        {
             Text = "Visible",
             RectMinSize = new Vector2(40, 0)
         };
-        var visibleCheckbox = new CheckBox() {
+        var visibleCheckbox = new CheckBox()
+        {
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
             Pressed = control.Visible
         };
@@ -81,19 +88,22 @@ public class Sample : Control
         _Params.AddChild(visibleHbox);
     }
 
-    private void PRFloat(Control control, string name, string paramName = "", float step = 0.01f, float minSizeX = 50) {
-        // paramName = paramName == "" ? name.ToLower() : paramName;
+    private void PRFloat(Control control, string name, string paramName = "", float step = 0.01f, float minSizeX = 50)
+    {
         paramName = name;
         var current = (float)control.Get(name);
-        var hbox = new HBoxContainer() {
+        var hbox = new HBoxContainer()
+        {
             Name = name,
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
         };
-        var labelObj = new Label() {
+        var labelObj = new Label()
+        {
             Text = paramName.Capitalize(),
             RectMinSize = new Vector2(minSizeX, 0),
         };
-        var input = new SpinBox() {
+        var input = new SpinBox()
+        {
             Name = "Value",
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
             Step = step,
@@ -105,29 +115,35 @@ public class Sample : Control
         _Params.AddChild(hbox);
     }
 
-    private void PRVector2(Control control, string name, float step = 0.01f, float minSizeX = 50) {
+    private void PRVector2(Control control, string name, float step = 0.01f, float minSizeX = 50)
+    {
         var current = (Vector2)control.Get(name);
-        var hbox = new HBoxContainer() {
+        var hbox = new HBoxContainer()
+        {
             Name = name,
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
         };
-        var labelObj = new Label() {
+        var labelObj = new Label()
+        {
             Name = "Label",
             Text = name,
             RectMinSize = new Vector2(minSizeX, 0),
         };
-        var vbox = new VBoxContainer() {
+        var vbox = new VBoxContainer()
+        {
             Name = "VBox",
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
         };
-        var inputX = new SpinBox() {
+        var inputX = new SpinBox()
+        {
             Name = "X",
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
             MaxValue = 9999,
             Step = step,
             Value = current.x
         };
-        var inputY = new SpinBox() {
+        var inputY = new SpinBox()
+        {
             Name = "Y",
             MaxValue = 9999,
             SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
@@ -144,11 +160,13 @@ public class Sample : Control
         _Params.AddChild(hbox);
     }
 
-    private void OnTouchPositionUpdate() {
+    private void OnTouchPositionUpdate()
+    {
         var selectedIdx = _EffectSelection.Selected;
         var effectName = _EffectSelection.GetItemText(selectedIdx);
 
-        if (effectName == "Shockwave") {
+        if (effectName == "Shockwave")
+        {
             var vpSize = GetViewportRect().Size;
 
             // Get vector2
@@ -159,19 +177,23 @@ public class Sample : Control
         }
     }
 
-    private void BuildParams(string type) {
-        foreach (Node node in _Params.GetChildren()) {
+    private void BuildParams(string type)
+    {
+        foreach (Node node in _Params.GetChildren())
+        {
             node.QueueFree();
             _Params.RemoveChild(node);
         }
 
-        if (type == "Vignette") {
+        if (type == "Vignette")
+        {
             PRVisible(_Vignette);
             PRFloat(_Vignette, nameof(Vignette.Size));
             PRFloat(_Vignette, nameof(Vignette.Ratio));
         }
 
-        else if (type == "Shockwave") {
+        else if (type == "Shockwave")
+        {
             PRVisible(_Shockwave);
             PRFloat(_Shockwave, nameof(Shockwave.Size));
             PRFloat(_Shockwave, nameof(Shockwave.Force));
@@ -179,10 +201,12 @@ public class Sample : Control
             PRVector2(_Shockwave, nameof(Shockwave.Center));
 
             // Btn
-            var h = new HBoxContainer() {
+            var h = new HBoxContainer()
+            {
                 SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
             };
-            var btn = new Button() {
+            var btn = new Button()
+            {
                 Text = "Animate",
                 SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
             };
@@ -191,29 +215,35 @@ public class Sample : Control
             _Params.AddChild(h);
         }
 
-        else if (type == "MotionBlur") {
+        else if (type == "MotionBlur")
+        {
             PRVisible(_MotionBlur);
             PRFloat(_MotionBlur, nameof(MotionBlur.Strength));
             PRFloat(_MotionBlur, nameof(MotionBlur.AngleDegrees), paramName: "angle_degrees");
         }
 
-        else if (type == "GaussianBlur") {
+        else if (type == "GaussianBlur")
+        {
             PRVisible(_GaussianBlur);
             PRFloat(_GaussianBlur, nameof(GaussianBlur.Strength));
         }
 
-        else if (type == "BetterBlur") {
+        else if (type == "BetterBlur")
+        {
             PRVisible(_BetterBlur);
             PRFloat(_BetterBlur, nameof(BetterBlur.Strength));
         }
     }
 
-    private void UpdateParams(string type) {
-        if (type == "Vignette") {
+    private void UpdateParams(string type)
+    {
+        if (type == "Vignette")
+        {
             _Params.GetNode<SpinBox>("Ratio/Value").Value = _Vignette.Ratio;
             _Params.GetNode<SpinBox>("Size/Value").Value = _Vignette.Size;
         }
-        else if (type == "Shockwave") {
+        else if (type == "Shockwave")
+        {
             var center = _Shockwave.Center;
             _Params.GetNode<SpinBox>("Center/VBox/X").Value = center.x;
             _Params.GetNode<SpinBox>("Center/VBox/Y").Value = center.y;
@@ -221,45 +251,56 @@ public class Sample : Control
             _Params.GetNode<SpinBox>("Thickness/Value").Value = _Shockwave.Thickness;
             _Params.GetNode<SpinBox>("Size/Value").Value = _Shockwave.Size;
         }
-        else if (type == "MotionBlur") {
+        else if (type == "MotionBlur")
+        {
             _Params.GetNode<SpinBox>("Strength/Value").Value = _MotionBlur.Strength;
             _Params.GetNode<SpinBox>("AngleDegrees/Value").Value = _MotionBlur.AngleDegrees;
         }
-        else if (type == "GaussianBlur") {
+        else if (type == "GaussianBlur")
+        {
             _Params.GetNode<SpinBox>("Strength/Value").Value = _GaussianBlur.Strength;
         }
-        else if (type == "BetterBlur") {
+        else if (type == "BetterBlur")
+        {
             _Params.GetNode<SpinBox>("Strength/Value").Value = _BetterBlur.Strength;
         }
     }
 
-    private void AnimateShockwave() {
+    private void AnimateShockwave()
+    {
         var x = _Params.GetNode<SpinBox>("Center/VBox/X");
         var y = _Params.GetNode<SpinBox>("Center/VBox/Y");
         _Shockwave.Start(new Vector2((float)x.Value, (float)y.Value));
     }
 
-    private void EffectVisibility(bool value, Control obj) {
+    private void EffectVisibility(bool value, Control obj)
+    {
         obj.Visible = value;
     }
 
-    private void ValueChanged(float value, Control obj, string name) {
+    private void ValueChanged(float value, Control obj, string name)
+    {
         UpdateShader(obj, name, value);
     }
 
-    private void ValueChangedVector2(float value, string coord, Control obj, string name) {
+    private void ValueChangedVector2(float value, string coord, Control obj, string name)
+    {
         var current = (Vector2)obj.Get(name);
         // var paramName = name.ToLower();
         var paramName = name;
 
-        if (coord == "x") {
+        if (coord == "x")
+        {
             UpdateShader(obj, paramName, new Vector2(value, current.y));
-        } else {
+        }
+        else
+        {
             UpdateShader(obj, paramName, new Vector2(current.x, value));
         }
     }
 
-    private void UpdateShader(Control obj, string name, object value) {
+    private void UpdateShader(Control obj, string name, object value)
+    {
         obj.Set(name, value);
         // ShaderExt.SetShaderParam(obj, name, value);
     }
@@ -268,7 +309,8 @@ public class Sample : Control
     {
         var vpSize = GetViewportRect().Size;
 
-        foreach (var sprite in _Sprites) {
+        foreach (var sprite in _Sprites)
+        {
             var pos = sprite.Position;
             var rot = sprite.RotationDegrees;
             var texSize = sprite.Texture.GetSize();
@@ -276,13 +318,17 @@ public class Sample : Control
 
             pos.x -= sprite.Scale.x * 100 * delta;
             rot += sprite.Scale.y * 10 * delta;
-            while (rot > 360) {
+            while (rot > 360)
+            {
                 rot -= 360;
             }
 
-            if (pos.x < -totalSize.x) {
+            if (pos.x < -totalSize.x)
+            {
                 pos.x = vpSize.x + totalSize.x;
-            } else if (pos.x > vpSize.x + totalSize.x) {
+            }
+            else if (pos.x > vpSize.x + totalSize.x)
+            {
                 pos.x = -totalSize.x;
             }
 
@@ -297,26 +343,32 @@ public class Sample : Control
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButton) {
+        if (@event is InputEventMouseButton mouseButton)
+        {
             _Touched = mouseButton.Pressed;
 
-            if (mouseButton.Pressed) {
+            if (mouseButton.Pressed)
+            {
                 _LastTouchedPosition = mouseButton.Position;
                 OnTouchPositionUpdate();
             }
         }
 
-        else if (@event is InputEventMouseMotion mouseMotion) {
-            if (_Touched) {
+        else if (@event is InputEventMouseMotion mouseMotion)
+        {
+            if (_Touched)
+            {
                 _LastTouchedPosition = mouseMotion.Position;
                 OnTouchPositionUpdate();
             }
         }
 
-        else if (@event is InputEventScreenTouch touch) {
+        else if (@event is InputEventScreenTouch touch)
+        {
             _Touched = touch.Pressed;
 
-            if (touch.Pressed) {
+            if (touch.Pressed)
+            {
                 _LastTouchedPosition = touch.Position;
                 OnTouchPositionUpdate();
             }

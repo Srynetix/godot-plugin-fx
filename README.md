@@ -26,6 +26,8 @@ There is an included sample scene in `samples/Sample.tscn` to play with the avai
 **Parameters**:
 - `strength`: Blur strength
 
+![gaussianblur](./misc/gaussianblur.gif)
+
 #### Better blur (`BetterBlur`)
 
 **How to use**: Only add in scene tree  
@@ -34,12 +36,16 @@ There is an included sample scene in `samples/Sample.tscn` to play with the avai
 
 *Note*: This is the `GaussianBlur` effect, but Web compatible (GLES2).
 
+![betterblur](./misc/betterblur.gif)
+
 #### Motion blur (`MotionBlur`)
 
 **How to use**: Only add in scene tree  
 **Parameters**:
 - `strength`: Blur strength
 - `angle_degrees`: Angle in degrees
+
+![motionblur](./misc/motionblur.gif)
 
 #### Shockwave (`Shockwave`)
 
@@ -48,8 +54,12 @@ There is an included sample scene in `samples/Sample.tscn` to play with the avai
 - `force`: Reflection force
 - `thickness`: Wave ring thickness
 
+![shockwave](./misc/shockwave.gif)
+
 #### Vignette (`Vignette`)
 
 **How to use**: Only add in scene tree  
 **Parameters**:
 - `ratio`: Vignette strength
+
+![vignette](./misc/vignette.gif)
